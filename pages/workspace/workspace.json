@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "照片处理",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

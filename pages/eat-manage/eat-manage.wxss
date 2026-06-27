@@ -1,0 +1,36 @@
+@import "../../styles/eat-page.wxss";
+
+.wheel-row-active {
+  border-color: #fb923c !important;
+  background: #fff7ed !important;
+}
+
+.active-badge {
+  font-size: 20rpx;
+  color: #ea580c;
+  background: #ffedd5;
+  padding: 4rpx 12rpx;
+  border-radius: 999rpx;
+  margin-left: 12rpx;
+}
+
+.delete-btn {
+  font-size: 24rpx;
+  color: #ef4444;
+  padding: 8rpx 16rpx;
+}
+
+.add-card {
+  margin-top: 24rpx;
+  padding: 28rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  border: 2rpx dashed #fdba74;
+  text-align: center;
+  color: #ea580c;
+  font-size: 28rpx;
+}
+
+.add-card:active {
+  background: #fff7ed;
+}

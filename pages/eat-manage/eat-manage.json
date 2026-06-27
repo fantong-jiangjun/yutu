@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "转盘管理",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

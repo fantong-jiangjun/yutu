@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "九宫格切图",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

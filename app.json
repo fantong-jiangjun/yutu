@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/img2pdf/img2pdf",
+    "pages/custom/custom",
+    "pages/workspace/workspace",
+    "pages/result/result",
+    "pages/grid-cut/grid-cut",
+    "pages/qrcode/qrcode",
+    "pages/eat/eat",
+    "pages/eat-manage/eat-manage",
+    "pages/eat-edit/eat-edit"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#2563eb",
+    "navigationBarTitleText": "报图助手",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f1f5f9",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.writePhotosAlbum": {
+      "desc": "用于将处理后的合规照片保存到相册"
+    }
+  }
+}

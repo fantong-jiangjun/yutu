@@ -1,0 +1,97 @@
+page {
+  background: #eef4ff;
+  color: #0f172a;
+  font-size: 28rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 24rpx 32rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 24rpx rgba(15, 23, 42, 0.06);
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  color: #0f172a;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 24rpx 0;
+  border: none;
+  line-height: 1.4;
+}
+
+.btn-primary[disabled] {
+  background: #94a3b8;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #334155;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  border: none;
+}
+
+.tag-ok {
+  color: #059669;
+  background: #d1fae5;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.tag-fail {
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+.kb-notice {
+  font-size: 22rpx;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 12rpx;
+}
+
+.form-input {
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+}
+
+.privacy-banner {
+  background: #eff6ff;
+  border: 1rpx solid #bfdbfe;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 24rpx;
+  color: #1e40af;
+  margin-bottom: 24rpx;
+}

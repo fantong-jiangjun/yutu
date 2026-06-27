@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "今天吃什么",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

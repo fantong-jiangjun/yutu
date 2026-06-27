@@ -1,0 +1,5 @@
+.ad-wrap {
+  margin-top: 24rpx;
+  overflow: hidden;
+  border-radius: 12rpx;
+}

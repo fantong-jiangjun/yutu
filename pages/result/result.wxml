@@ -1,0 +1,105 @@
+<view class="container" wx:if="{{session}}">
+  <view class="card">
+    <view class="card-title row-between">
+      <text>处理结果</text>
+      <text class="{{session.afterReport.pass ? 'tag-ok' : 'tag-fail'}}" wx:if="{{compareMode === 'after'}}">
+        {{session.afterReport.pass ? '复检合格' : '仍有问题'}}
+      </text>
+    </view>
+
+    <view class="compare-tabs">
+      <view class="tab {{compareMode === 'before' ? 'active' : ''}}" bindtap="showCompareBefore">原图</view>
+      <view class="tab {{compareMode === 'after' ? 'active' : ''}}" bindtap="showCompareAfter">成品</view>
+    </view>
+
+    <view class="preview-stage">
+      <view class="preview-inner" style="transform: scale({{zoomScale}});">
+        <image
+          class="preview-img {{compareMode === 'before' ? 'preview-show' : 'preview-hide'}}"
+          src="{{session.originalPath}}"
+          mode="aspectFit"
+        />
+        <image
+          class="preview-img {{compareMode === 'after' ? 'preview-show' : 'preview-hide'}}"
+          src="{{session.resultPath}}"
+          mode="aspectFit"
+        />
+      </view>
+    </view>
+
+    <view class="zoom-btns">
+      <button class="zoom-btn" size="mini" bindtap="onZoomOut">缩小</button>
+      <text class="zoom-text">{{zoomScale}}x</text>
+      <button class="zoom-btn" size="mini" bindtap="onZoomIn">放大</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">{{paramTitle}}</view>
+    <view class="kb-notice" wx:if="{{compareMode === 'after'}}">提示：会尽量接近要求值（如 500KB 约 490KB），绝不超过。</view>
+    <view class="param-single">
+      <view class="param-single-row" wx:for="{{paramRows}}" wx:key="label">
+        <text class="param-label">{{item.label}}</text>
+        <text class="param-value {{item.highlight ? 'highlight' : ''}}">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{compareMode === 'after'}}">
+    <view class="kb-notice">提示：会尽量接近你填的大小（如填 500，约 490KB），绝不超过。</view>
+    <view class="card-title">调整最大体积（KB）</view>
+    <view class="recompress-row">
+      <input
+        class="recompress-input form-input"
+        type="number"
+        value="{{recompressKB}}"
+        bindinput="onRecompressKBInput"
+        placeholder="不超过多少 KB，如 500"
+      />
+      <button
+        class="recompress-btn"
+        size="mini"
+        bindtap="onRecompressToKB"
+        disabled="{{recompressing}}"
+      >
+        {{recompressing ? '压缩中...' : '重新压缩'}}
+      </button>
+    </view>
+    <view class="recompress-hint">填写体积上限，会尽量接近但不超出</view>
+  </view>
+
+  <view class="card" wx:if="{{compareMode === 'after' && session.afterReport}}">
+    <view class="card-title">合规复检</view>
+    <view class="recheck-item" wx:for="{{session.afterReport.checks}}" wx:key="key">
+      <view class="recheck-main">
+        <text>{{item.label}}</text>
+        <text class="{{item.pass ? 'tag-ok' : 'tag-fail'}}">{{item.pass ? '合格' : '不合格'}}</text>
+      </view>
+      <view class="recheck-detail" wx:if="{{!item.pass}}">
+        当前 {{item.current}}，要求 {{item.expected}}
+      </view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{session.processLogs.length}}">
+    <view class="card-title">处理日志</view>
+    <view class="log-line" wx:for="{{session.processLogs}}" wx:key="*this">· {{item}}</view>
+  </view>
+
+  <block wx:if="{{session.skippedProcess}}">
+    <view class="skip-tip">照片已符合规格，未做额外处理</view>
+  </block>
+
+  <view class="save-tip">
+    今日免费保存剩余 {{remainingFree}} / 3 次 · 检测与预览免费
+  </view>
+
+  <button class="btn-primary" bindtap="onSaveTap" disabled="{{saving}}">
+    {{saving ? '保存中...' : '保存到相册'}}
+  </button>
+  <button class="btn-secondary home-btn" bindtap="goHome">返回首页</button>
+
+  <ad-banner />
+
+  <canvas type="2d" id="recompressCanvas" class="hidden-canvas" style="width:800px;height:800px;" />
+</view>

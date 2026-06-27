@@ -1,0 +1,107 @@
+@import "../../styles/eat-page.wxss";
+
+.edit-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  border: 1rpx solid #fed7aa;
+}
+
+.edit-label {
+  font-size: 24rpx;
+  color: #9a3412;
+  margin-bottom: 12rpx;
+}
+
+.name-input {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+  background: #fff7ed;
+  border: 1rpx solid #fdba74;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.add-row {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.add-input {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+  background: #fff7ed;
+  border: 1rpx solid #fdba74;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.add-btn {
+  flex-shrink: 0;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 28rpx;
+  background: #fb923c;
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #ffedd5;
+}
+
+.item-row:last-child {
+  border-bottom: none;
+}
+
+.item-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #334155;
+}
+
+.item-del {
+  font-size: 24rpx;
+  color: #ef4444;
+  padding: 8rpx 16rpx;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #fb923c, #ea580c);
+  color: #fff;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  padding: 24rpx 0;
+  border: none;
+  margin-bottom: 16rpx;
+}
+
+.reset-btn {
+  background: #fff;
+  color: #ea580c;
+  border: 1rpx solid #fdba74;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+}
+
+.hint-text {
+  font-size: 22rpx;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 16rpx;
+}

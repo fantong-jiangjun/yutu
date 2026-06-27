@@ -1,0 +1,112 @@
+<view class="index-page">
+  <view class="notice-bar">
+    <text class="notice-text">照片仅在手机本地处理，不上传服务器</text>
+  </view>
+
+  <view class="hero-card" bindtap="goSmartUpload">
+    <view class="hero-top">
+      <text class="hero-tag">推荐</text>
+      <text class="hero-arrow">›</text>
+    </view>
+    <view class="hero-title">修改图片尺寸</view>
+    <view class="hero-desc">一寸照 · 二寸照 · 指定体积</view>
+    <view class="hero-steps">
+      <text class="step-chip">传照片</text>
+      <text class="step-chip">选规格</text>
+      <text class="step-chip">修到达标</text>
+      <text class="step-chip">保存</text>
+    </view>
+    <view class="hero-btn">开始处理</view>
+  </view>
+
+  <view class="panel">
+    <view class="panel-title">全部工具</view>
+    <view class="menu-list">
+      <view class="menu-item" bindtap="goCustom">
+        <view class="menu-icon icon-bg-blue">
+          <view class="icon-edit icon-color-blue">
+            <view class="icon-edit-corner icon-color-blue"></view>
+          </view>
+        </view>
+        <view class="menu-body">
+          <view class="menu-name">手动填写规格</view>
+          <view class="menu-desc">自定义宽高、格式、体积上限</view>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+
+      <view class="menu-divider"></view>
+
+      <view class="menu-item" bindtap="goImg2Pdf">
+        <view class="menu-icon icon-bg-green">
+          <view class="icon-doc icon-color-green">
+            <view class="icon-doc-line icon-color-green"></view>
+            <view class="icon-doc-line icon-color-green"></view>
+          </view>
+        </view>
+        <view class="menu-body">
+          <view class="menu-name">图片转 PDF</view>
+          <view class="menu-desc">多张合成，张数不限</view>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+
+      <view class="menu-divider"></view>
+
+      <view class="menu-item" bindtap="goGridCut">
+        <view class="menu-icon icon-bg-orange">
+          <view class="icon-grid">
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+            <view class="icon-cell icon-color-orange"></view>
+          </view>
+        </view>
+        <view class="menu-body">
+          <view class="menu-name">九宫格切图</view>
+          <view class="menu-desc">切成 9 张，按顺序发朋友圈</view>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+
+      <view class="menu-divider"></view>
+
+      <view class="menu-item" bindtap="goQrcode">
+        <view class="menu-icon icon-bg-purple">
+          <view class="icon-qr icon-color-purple">
+            <view class="icon-qr-tl icon-color-purple"></view>
+            <view class="icon-qr-br icon-color-purple"></view>
+          </view>
+        </view>
+        <view class="menu-body">
+          <view class="menu-name">二维码生成</view>
+          <view class="menu-desc">粘贴网址或链接，扫码打开</view>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+
+      <view class="menu-divider"></view>
+
+      <view class="menu-item" bindtap="goEat">
+        <view class="menu-icon icon-bg-coral">
+          <view class="icon-food">
+            <view class="icon-food-plate"></view>
+            <view class="icon-food-dot"></view>
+          </view>
+        </view>
+        <view class="menu-body">
+          <view class="menu-name">今天吃什么</view>
+          <view class="menu-desc">转盘抽签，可自定义周边店铺</view>
+        </view>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <ad-banner />
+</view>

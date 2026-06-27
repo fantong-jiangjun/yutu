@@ -1,0 +1,35 @@
+<view class="eat-page">
+  <view class="eat-banner">可创建多个转盘，保存周边店铺，下次直接切换使用</view>
+
+  <view class="manage-list">
+    <view
+      class="manage-row {{item.id === activeId ? 'wheel-row-active' : ''}}"
+      wx:for="{{wheels}}"
+      wx:key="id"
+      bindtap="onSelect"
+      data-id="{{item.id}}"
+    >
+      <view class="manage-main">
+        <view class="manage-name">
+          {{item.name}}
+          <text class="active-badge" wx:if="{{item.id === activeId}}">使用中</text>
+        </view>
+        <view class="manage-desc">{{item.items.length}} 个选项 · {{item.builtIn ? '系统默认' : '自定义'}}</view>
+      </view>
+      <view class="manage-actions" catchtap="noop">
+        <text class="edit-link" catchtap="onEdit" data-id="{{item.id}}">编辑</text>
+        <text
+          class="delete-btn"
+          wx:if="{{!item.builtIn}}"
+          catchtap="onDelete"
+          data-id="{{item.id}}"
+          data-name="{{item.name}}"
+        >删除</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="add-card" bindtap="onCreate">+ 新建转盘（如：公司楼下、学校周边）</view>
+
+  <ad-banner />
+</view>

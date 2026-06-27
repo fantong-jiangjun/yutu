@@ -1,0 +1,25 @@
+<view class="container">
+  <view class="card">
+    <view class="card-title">自定义上传要求</view>
+    <view class="form-row">
+      <text class="label">宽度（像素）</text>
+      <input class="input" type="number" value="{{width}}" bindinput="onWidthInput" placeholder="如 295" />
+    </view>
+    <view class="form-row">
+      <text class="label">高度（像素）</text>
+      <input class="input" type="number" value="{{height}}" bindinput="onHeightInput" placeholder="如 413" />
+    </view>
+    <view class="form-row">
+      <text class="label">最大体积（KB）</text>
+      <input class="input form-input" type="number" value="{{maxKB}}" bindinput="onMaxKBInput" placeholder="不超过多少 KB" />
+    </view>
+    <view class="kb-notice">提示：会尽量接近你填的大小（如填 500，约 490KB），绝不超过。</view>
+    <view class="form-row">
+      <text class="label">格式</text>
+      <picker mode="selector" range="{{formats}}" value="{{formatIndex}}" bindchange="onFormatChange">
+        <view class="picker-val">{{formats[formatIndex]}}</view>
+      </picker>
+    </view>
+  </view>
+  <button class="btn-primary" bindtap="onSubmit">开始处理</button>
+</view>

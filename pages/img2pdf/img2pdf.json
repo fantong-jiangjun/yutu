@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "图片转 PDF",
+  "usingComponents": {
+    "ad-banner": "/components/ad-banner/ad-banner"
+  }
+}

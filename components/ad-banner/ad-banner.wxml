@@ -1,0 +1,3 @@
+<view class="ad-wrap" wx:if="{{showAd && adUnitId}}">
+  <ad unit-id="{{adUnitId}}" ad-intervals="30" binderror="onAdError" />
+</view>

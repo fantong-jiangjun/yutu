@@ -1,0 +1,28 @@
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.label {
+  width: 220rpx;
+  font-size: 28rpx;
+  color: #475569;
+}
+
+.input {
+  flex: 1;
+}
+
+.picker-val {
+  flex: 1;
+  background: #f8fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.btn-primary {
+  margin-top: 16rpx;
+}

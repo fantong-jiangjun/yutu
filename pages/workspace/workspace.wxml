@@ -1,0 +1,157 @@
+<view class="container">
+  <view class="card scene-card" wx:if="{{scene}}">
+    <view class="card-title">{{scene.name}}</view>
+    <view class="scene-spec">{{scene.tips}}</view>
+    <view class="kb-target-block kb-top" wx:if="{{imagePath && (specSelected || flowMode === 'exam')}}">
+      <view class="kb-notice">提示：会尽量接近你填的大小（如填 500，约 490KB），绝不超过。</view>
+      <view class="fit-mode-label">最大体积（KB）</view>
+      <view class="kb-target-row">
+        <input
+          class="kb-target-input form-input"
+          type="number"
+          value="{{userMaxKB}}"
+          bindinput="onUserMaxKBInput"
+          placeholder="不超过多少 KB，如 200"
+        />
+        <button class="kb-target-btn" size="mini" bindtap="onApplyMaxKB">应用</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="card scene-card" wx:elif="{{flowMode === 'smart' && step === 'pick'}}">
+    <view class="card-title">先传照片，再选规格</view>
+    <view class="scene-spec">支持一寸、二寸或仅压体积</view>
+  </view>
+
+  <view class="card" wx:if="{{!imagePath}}">
+    <view class="card-title">选择照片</view>
+    <view class="pick-btns">
+      <button class="pick-btn" bindtap="chooseAlbum">从相册选择</button>
+      <button class="pick-btn" bindtap="chooseCamera">拍照</button>
+    </view>
+  </view>
+
+  <block wx:if="{{imagePath}}">
+    <view class="card">
+      <view class="card-title">原图预览</view>
+      <image class="preview-img" src="{{previewPath}}" mode="aspectFit" />
+      <view class="repick" bindtap="chooseAlbum">重新选图</view>
+    </view>
+
+    <view class="card" wx:if="{{flowMode === 'smart' && step === 'chooseSpec'}}">
+      <view class="card-title">1. 选择规格类型</view>
+      <view class="size-options">
+        <view
+          class="size-item {{selectedSpecId === item.id ? 'size-item-active' : ''}}"
+          wx:for="{{sizeOptions}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onSizeOptionTap"
+        >
+          <view class="size-name">{{item.name}}</view>
+          <view class="size-desc">{{item.desc}}</view>
+        </view>
+      </view>
+
+      <view class="kb-target-block">
+        <view class="kb-notice">提示：会尽量接近你填的大小（如填 500，约 490KB），绝不超过。</view>
+        <view class="fit-mode-label">2. 最大体积（KB）</view>
+        <input
+          class="kb-target-input kb-full form-input"
+          type="number"
+          value="{{userMaxKB}}"
+          bindinput="onUserMaxKBInput"
+          placeholder="不超过多少 KB，如 200"
+        />
+        <view class="kb-target-hint">填写体积上限，处理时会尽量接近该值但不超出</view>
+      </view>
+
+      <button
+        class="btn-primary spec-confirm-btn"
+        bindtap="onConfirmSpecAndDetect"
+        disabled="{{!selectedSpecId || !userMaxKB}}"
+      >
+        确认规格并检测
+      </button>
+    </view>
+
+    <view class="card" wx:if="{{report && (specSelected || flowMode === 'exam')}}">
+      <view class="card-title row-between">
+        <text>合规检测报告</text>
+        <text class="{{report.pass ? 'tag-ok' : 'tag-fail'}}">{{report.pass ? '全部合格' : report.failCount + '项不合格'}}</text>
+      </view>
+
+      <view class="check-list">
+        <view class="check-item" wx:for="{{report.checks}}" wx:key="key">
+          <view class="check-head">
+            <text class="check-label">{{item.label}}</text>
+            <text class="{{item.pass ? 'tag-ok' : 'tag-fail'}}">{{item.pass ? '✓' : '✗'}}</text>
+          </view>
+          <view class="check-detail">当前 {{item.current}} · 要求 {{item.expected}}</view>
+          <view class="check-msg">{{item.message}}</view>
+        </view>
+      </view>
+
+      <view class="fit-mode-block" wx:if="{{!report.pass && scene.checkMode !== 'sizeOnly'}}">
+        <view class="fit-mode-label">处理方式</view>
+        <view class="fit-mode-options">
+          <view
+            class="fit-mode-item {{fitMode === item.id ? 'active' : ''}}"
+            wx:for="{{fitModeOptions}}"
+            wx:key="id"
+            data-mode="{{item.id}}"
+            bindtap="onFitModeTap"
+          >
+            <view class="fit-mode-name">{{item.name}}</view>
+            <view class="fit-mode-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="crop-block" wx:if="{{!report.pass && scene.checkMode !== 'sizeOnly' && fitMode === 'cover'}}">
+        <view class="row-between crop-block-head">
+          <text class="fit-mode-label">裁剪位置微调</text>
+          <text class="link" bindtap="toggleCropAdjust">{{showCropAdjust ? '收起' : '展开'}}</text>
+        </view>
+        <block wx:if="{{showCropAdjust}}">
+          <view class="slider-row">
+            <text>水平位置</text>
+            <slider min="0" max="100" value="{{cropOffsetX}}" bindchange="onCropXChange" show-value />
+          </view>
+          <view class="slider-row">
+            <text>垂直位置</text>
+            <slider min="0" max="100" value="{{cropOffsetY}}" bindchange="onCropYChange" show-value />
+          </view>
+        </block>
+        <view class="crop-hint" wx:else>拖动滑块调整裁剪区域（仅居中裁剪模式）</view>
+      </view>
+
+      <view class="report-action report-action-ok" wx:if="{{report.pass}}">
+        <view class="report-action-title">照片已合规</view>
+        <view class="report-action-desc">符合「{{scene.name}}」≤{{userMaxKB}}KB，可直接保存</view>
+        <button class="btn-primary report-action-btn" bindtap="goToResultDirect" disabled="{{processing}}">
+          直接保存
+        </button>
+      </view>
+
+      <view class="report-action report-action-fail" wx:else>
+        <view class="report-action-title">照片不合规</view>
+        <view class="report-action-desc">
+          不符合「{{scene.name}}」≤{{userMaxKB}}KB 要求，是否自动处理？
+        </view>
+        <button class="btn-primary report-action-btn" bindtap="onProcess" disabled="{{processing}}">
+          {{processing ? '处理中...' : '按 ' + userMaxKB + 'KB 自动处理'}}
+        </button>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{processLogs.length}}">
+      <view class="card-title">处理日志</view>
+      <view class="log-item" wx:for="{{processLogs}}" wx:key="*this">· {{item}}</view>
+    </view>
+  </block>
+
+  <canvas type="2d" id="processCanvas" class="hidden-canvas" style="width:800px;height:800px;" />
+
+  <ad-banner />
+</view>

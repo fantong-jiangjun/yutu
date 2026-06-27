@@ -1,0 +1,298 @@
+.index-page {
+  min-height: 100vh;
+  padding: 24rpx 32rpx 48rpx;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #eef4ff 0%, #f7f5f2 55%, #faf9f7 100%);
+}
+
+/* ── 顶部提示 ── */
+.notice-bar {
+  padding: 20rpx 28rpx;
+  margin-bottom: 24rpx;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(147, 197, 253, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.notice-text {
+  font-size: 24rpx;
+  color: #4b6cb7;
+  line-height: 1.6;
+}
+
+/* ── 主功能卡片 ── */
+.hero-card {
+  background: linear-gradient(155deg, #ffffff 0%, #f3f8ff 100%);
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx 32rpx;
+  margin-bottom: 24rpx;
+  border: 1rpx solid #dbeafe;
+  box-shadow: 0 8rpx 28rpx rgba(59, 130, 246, 0.1);
+}
+
+.hero-card:active {
+  transform: scale(0.995);
+  opacity: 0.96;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.hero-tag {
+  font-size: 22rpx;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  font-weight: 500;
+}
+
+.hero-arrow {
+  font-size: 36rpx;
+  color: #93c5fd;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.hero-title {
+  font-size: 38rpx;
+  font-weight: 600;
+  color: #1e3a5f;
+  margin-bottom: 10rpx;
+}
+
+.hero-desc {
+  font-size: 26rpx;
+  color: #64748b;
+  margin-bottom: 24rpx;
+}
+
+.hero-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 32rpx;
+}
+
+.step-chip {
+  font-size: 22rpx;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.08);
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid rgba(147, 197, 253, 0.35);
+}
+
+.hero-btn {
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding: 24rpx 0;
+  border-radius: 16rpx;
+  box-shadow: 0 6rpx 20rpx rgba(37, 99, 235, 0.28);
+}
+
+/* ── 工具面板 ── */
+.panel {
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 24rpx;
+  border: 1rpx solid rgba(226, 232, 240, 0.9);
+  overflow: hidden;
+  box-shadow: 0 6rpx 24rpx rgba(15, 23, 42, 0.05);
+}
+
+.panel-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #64748b;
+  padding: 28rpx 32rpx 12rpx;
+}
+
+.menu-list {
+  padding: 0 0 12rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 28rpx 32rpx;
+}
+
+.menu-item:active {
+  background: rgba(241, 245, 249, 0.8);
+}
+
+.menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon-bg-blue { background: #eff6ff; }
+.icon-bg-green { background: #ecfdf5; }
+.icon-bg-orange { background: #fff7ed; }
+.icon-bg-purple { background: #f5f3ff; }
+.icon-bg-coral { background: #fff7ed; }
+
+.menu-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6rpx;
+}
+
+.menu-desc {
+  font-size: 24rpx;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+.menu-arrow {
+  font-size: 34rpx;
+  color: #cbd5e1;
+  flex-shrink: 0;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.menu-divider {
+  height: 1rpx;
+  background: #f1f5f9;
+  margin-left: 136rpx;
+}
+
+/* ── 图标颜色 ── */
+.icon-color-blue { border-color: #3b82f6; background: #3b82f6; }
+.icon-edit.icon-color-blue { background: transparent; border-color: #3b82f6; }
+.icon-edit-corner.icon-color-blue { background: #3b82f6; }
+
+.icon-color-green { border-color: #10b981; background: #10b981; }
+.icon-doc.icon-color-green { background: transparent; border-color: #10b981; }
+.icon-doc-line.icon-color-green { background: #10b981; }
+
+.icon-color-orange { background: #f59e0b; }
+
+.icon-color-purple { border-color: #8b5cf6; background: #8b5cf6; }
+.icon-qr.icon-color-purple { background: transparent; border-color: #8b5cf6; }
+.icon-qr-tl.icon-color-purple { border-color: #8b5cf6; background: transparent; }
+.icon-qr-br.icon-color-purple { background: #8b5cf6; }
+
+.icon-food {
+  width: 34rpx;
+  height: 34rpx;
+  position: relative;
+}
+
+.icon-food-plate {
+  width: 34rpx;
+  height: 34rpx;
+  border: 3rpx solid #ea580c;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.icon-food-dot {
+  position: absolute;
+  top: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10rpx;
+  height: 10rpx;
+  background: #ea580c;
+  border-radius: 50%;
+}
+
+/* ── 线性图标 ── */
+.icon-edit {
+  width: 32rpx;
+  height: 32rpx;
+  border: 3rpx solid;
+  border-radius: 5rpx;
+  position: relative;
+}
+
+.icon-edit-corner {
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  width: 18rpx;
+  height: 3rpx;
+  transform: rotate(-45deg);
+  border-radius: 2rpx;
+}
+
+.icon-doc {
+  width: 26rpx;
+  height: 34rpx;
+  border: 3rpx solid;
+  border-radius: 4rpx;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+}
+
+.icon-doc-line {
+  width: 14rpx;
+  height: 3rpx;
+  border-radius: 2rpx;
+  margin: 0 auto 6rpx;
+}
+
+.icon-grid {
+  width: 30rpx;
+  height: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rpx;
+}
+
+.icon-cell {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 2rpx;
+  opacity: 0.9;
+}
+
+.icon-qr {
+  width: 30rpx;
+  height: 30rpx;
+  border: 3rpx solid;
+  border-radius: 4rpx;
+  position: relative;
+}
+
+.icon-qr-tl {
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  width: 10rpx;
+  height: 10rpx;
+  border: 2rpx solid;
+  border-radius: 2rpx;
+  box-sizing: border-box;
+}
+
+.icon-qr-br {
+  position: absolute;
+  bottom: 4rpx;
+  right: 4rpx;
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 2rpx;
+}

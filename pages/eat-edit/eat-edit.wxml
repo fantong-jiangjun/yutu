@@ -1,0 +1,39 @@
+<view class="eat-page">
+  <view class="edit-card">
+    <view class="edit-label">转盘名称</view>
+    <input
+      class="name-input"
+      value="{{name}}"
+      bindinput="onNameInput"
+      placeholder="如：公司楼下、家附近"
+      maxlength="20"
+    />
+  </view>
+
+  <view class="edit-card">
+    <view class="edit-label">添加选项</view>
+    <view class="add-row">
+      <input
+        class="add-input"
+        value="{{newItem}}"
+        bindinput="onNewItemInput"
+        placeholder="输入店名或菜品"
+        maxlength="30"
+        confirm-type="done"
+        bindconfirm="onAddItem"
+      />
+      <button class="add-btn" bindtap="onAddItem">添加</button>
+    </view>
+    <view class="edit-label">共 {{items.length}} 项（至少 2 项才能转）</view>
+    <view class="item-row" wx:for="{{items}}" wx:key="*this">
+      <text class="item-text">{{item}}</text>
+      <text class="item-del" bindtap="onRemoveItem" data-index="{{index}}">删除</text>
+    </view>
+    <view class="hint-text" wx:if="{{!items.length}}">还没有选项，请添加周边店铺</view>
+  </view>
+
+  <button class="save-btn" bindtap="onSave">保存转盘</button>
+  <button class="reset-btn" wx:if="{{builtIn}}" bindtap="onResetDefault">{{resetLabel}}</button>
+
+  <ad-banner />
+</view>

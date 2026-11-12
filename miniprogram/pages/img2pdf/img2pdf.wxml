@@ -1,0 +1,83 @@
+<view class="container">
+  <view class="privacy-banner">
+    <text>🔒 本地转换，多张图片合成一个 PDF</text>
+  </view>
+
+  <view class="card">
+    <view class="card-title">选择图片</view>
+    <view class="pick-btns">
+      <button class="pick-btn" bindtap="chooseImages">{{images.length ? '继续添加' : '从相册选择'}}</button>
+      <button class="pick-btn pick-btn-clear" wx:if="{{images.length}}" bindtap="clearImages">清空</button>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{images.length}}">
+    <view class="card-title">已选 {{images.length}} 张</view>
+    <view class="img-list">
+      <view class="img-item" wx:for="{{images}}" wx:key="*this">
+        <image class="thumb" src="{{item}}" mode="aspectFill" />
+        <view class="img-remove" data-index="{{index}}" bindtap="removeImage">删除</view>
+      </view>
+    </view>
+    <view class="reorder-hint">按选择顺序合成 PDF，如需调整顺序请清空后重选</view>
+
+    <view class="pdf-name-block">
+      <view class="pdf-name-label">PDF 文件名</view>
+      <view class="pdf-name-row">
+        <input
+          class="pdf-name-input"
+          value="{{pdfName}}"
+          bindinput="onPdfNameInput"
+          placeholder="例如：我的资料"
+          maxlength="40"
+        />
+        <text class="pdf-name-suffix">.pdf</text>
+      </view>
+    </view>
+  </view>
+
+  <button
+    class="btn-primary"
+    bindtap="onConvert"
+    disabled="{{!images.length || converting}}"
+  >
+    {{converting ? '转换中...' : '合成 PDF（' + images.length + ' 张）'}}
+  </button>
+
+  <view class="card result-card" wx:if="{{pdfPath}}">
+    <view class="card-title">转换完成</view>
+    <view class="result-text">已将 {{images.length}} 张图片合成 PDF（约 {{pdfSizeText}}）</view>
+    <view class="result-filename">当前文件名：{{pdfFileName}}</view>
+    <view class="compress-tip" wx:if="{{autoCompressed}}">预计 PDF 超过 {{maxPdfMb}}MB，已自动降低画质，图片尺寸保持不变</view>
+
+    <view class="pdf-name-block pdf-name-block-result">
+      <view class="pdf-name-label">重命名</view>
+      <view class="pdf-name-row">
+        <input
+          class="pdf-name-input"
+          value="{{pdfName}}"
+          bindinput="onPdfNameInput"
+          placeholder="输入新文件名"
+          maxlength="40"
+        />
+        <text class="pdf-name-suffix">.pdf</text>
+      </view>
+      <button class="rename-btn" bindtap="applyPdfRename">应用新名称</button>
+    </view>
+
+    <button class="btn-primary" bindtap="openPdf">打开预览</button>
+    <button class="share-btn" bindtap="sharePdf">分享 PDF 文件</button>
+  </view>
+
+  <view class="foot-note">
+    <view class="foot-note-title">说明</view>
+    <view class="foot-note-item">· 微信相册每次最多选 9 张，可多次添加</view>
+    <view class="foot-note-item">· 单次合成最多 {{maxPages}} 张</view>
+    <view class="foot-note-item">· 保留原图尺寸，预计 PDF 超过 {{maxPdfMb}}MB 时仅降低画质，否则可能闪退</view>
+    <view class="foot-note-item">· 本地合成 PDF；图片仅用于内容安全检测，检测后自动删除</view>
+  </view>
+
+  <canvas type="2d" id="pdfCanvas" class="hidden-canvas" style="width:800px;height:800px;" />
+
+  <ad-banner />
+</view>

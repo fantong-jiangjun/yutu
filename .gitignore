@@ -12,3 +12,10 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules/
+
+# IDE / 本地配置
+.idea/
+.vscode/
+
+# 与小程序无关的本地脚本
+yutu/

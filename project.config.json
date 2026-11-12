@@ -1,5 +1,7 @@
 {
-  "description": "报图助手 - 考试报名照片合规处理",
+  "description": "宇图助手 - 考试报名照片合规处理",
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
   "packOptions": {
     "ignore": [],
     "include": []
@@ -48,7 +50,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "3.3.4",
-  "appid": "wx9467c3934e800288",
+  "appid": "wx9b72343e7b29bd0c",
   "projectname": "baotu-assistant",
   "condition": {},
   "editorSetting": {

@@ -1,0 +1,57 @@
+<view class="tool-page">
+  <view class="tool-banner">
+    <text>🔒</text>
+    <text>本地切图，适合发朋友圈九宫格；所选图片需通过微信内容安全检测</text>
+  </view>
+
+  <view class="tool-card" style="padding: 28rpx;">
+    <view class="pick-btns">
+      <button class="pick-btn" bindtap="chooseImage">{{srcPath ? '换一张' : '从相册选择'}}</button>
+    </view>
+    <view class="pick-hint">建议选正方形或接近正方形的图片，切出来更整齐</view>
+  </view>
+
+  <view class="tool-card" style="padding: 28rpx;" wx:if="{{srcPath}}">
+    <view class="grid-preview-wrap">
+      <image class="grid-preview-img" src="{{srcPath}}" mode="aspectFill" />
+      <view class="grid-lines">
+        <view class="grid-line-v grid-line-v1"></view>
+        <view class="grid-line-v grid-line-v2"></view>
+        <view class="grid-line-h grid-line-h1"></view>
+        <view class="grid-line-h grid-line-h2"></view>
+      </view>
+    </view>
+    <button class="pick-btn" style="margin-top: 24rpx;" bindtap="onSplit" disabled="{{splitting}}">
+      {{splitting ? '切图中...' : '切成 9 张'}}
+    </button>
+  </view>
+
+  <view class="tool-card" style="padding: 28rpx;" wx:if="{{pieces.length}}">
+    <view style="font-size: 28rpx; font-weight: 600; color: #1e3a8a; margin-bottom: 16rpx;">切图结果（按顺序发朋友圈）</view>
+    <view class="grid-preview-wrap grid-result-wrap">
+      <view class="grid-result">
+        <view
+          class="grid-piece"
+          wx:for="{{pieces}}"
+          wx:key="index"
+          bindtap="previewPiece"
+          data-index="{{index}}"
+        >
+          <image class="grid-piece-img" src="{{item.path}}" mode="scaleToFill" />
+        </view>
+      </view>
+    </view>
+    <button class="pick-btn" style="margin-top: 24rpx;" bindtap="saveAll" disabled="{{saving}}">
+      {{saving ? '保存中...' : '全部保存到相册'}}
+    </button>
+  </view>
+
+  <view class="foot-note">
+    <view class="foot-note-item">· 切图顺序：从左到右、从上到下，第 1～9 张</view>
+    <view class="foot-note-item">· 发朋友圈时按相同顺序选图即可拼成完整大图</view>
+  </view>
+
+  <canvas type="2d" id="gridCanvas" class="hidden-canvas" />
+
+  <ad-banner />
+</view>

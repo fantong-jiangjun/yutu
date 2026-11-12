@@ -3,7 +3,6 @@ const { canSaveFree, getRemainingFreeSaves, recordSave, FREE_SAVE_PER_DAY } = re
 const { applyMaxKBToScene } = require('../../utils/scenes')
 const { compressVolumeOnly, processCompliance } = require('../../utils/image-processor')
 const { buildShareMessage } = require('../../utils/share')
-const { guardImagesOutput } = require('../../utils/sec-check')
 
 Page({
   onShareAppMessage() {
@@ -183,18 +182,13 @@ Page({
     })
   },
 
-  async onSaveTap() {
-    if (this.data.saving || this.data.adShowing || this.checkingSafety) return
+  onSaveTap() {
+    if (this.data.saving || this.data.adShowing) return
     const { session } = this.data
     if (!session || !session.afterReport || !session.afterReport.pass) {
       wx.showToast({ title: '复检未通过，暂不能保存', icon: 'none' })
       return
     }
-    // 先确认内容安全，再进入免费额度 / 激励视频流程，避免用户看完广告才被拦截
-    this.checkingSafety = true
-    const safe = await guardImagesOutput(session.secTraceIds)
-    this.checkingSafety = false
-    if (!safe) return
     if (canSaveFree()) {
       this.doSave()
       return

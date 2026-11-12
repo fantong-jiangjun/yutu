@@ -1,6 +1,5 @@
 const { getAllWheels, getActiveWheelId, setActiveWheel, deleteWheel, createWheel } = require('../../utils/food-wheel-storage')
 const { buildShareMessage } = require('../../utils/share')
-const { guardText } = require('../../utils/sec-check')
 
 Page({
   onShareAppMessage() {
@@ -60,10 +59,9 @@ Page({
       title: '新建转盘',
       editable: true,
       placeholderText: '如：公司楼下、家附近',
-      success: async (res) => {
+      success: (res) => {
         if (!res.confirm) return
         const name = (res.content || '').trim() || '我的转盘'
-        if (!(await guardText(name))) return
         const wheel = createWheel(name, ['选项一', '选项二', '选项三'])
         setActiveWheel(wheel.id)
         wx.navigateTo({ url: `/pages/eat-edit/eat-edit?id=${wheel.id}` })

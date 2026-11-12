@@ -9,7 +9,6 @@ const {
 const { runDetection, formatKB } = require('../../utils/detect')
 const { processCompliance, compressVolumeOnly } = require('../../utils/image-processor')
 const { buildShareMessage } = require('../../utils/share')
-const { guardPickedImages } = require('../../utils/sec-check')
 
 Page({
   onShareAppMessage() {
@@ -21,7 +20,6 @@ Page({
     scene: null,
     imagePath: '',
     previewPath: '',
-    secTraceId: '',
     report: null,
     processing: false,
     cropOffsetX: 50,
@@ -93,14 +91,11 @@ Page({
       mediaType: ['image'],
       sourceType,
       sizeType: ['original'],
-      success: async (res) => {
+      success: (res) => {
         const path = res.tempFiles[0].tempFilePath
-        const checked = await guardPickedImages([path])
-        if (!checked || !checked.paths.length) return
         const patch = {
           imagePath: path,
           previewPath: path,
-          secTraceId: checked.traceIds[0],
           showCropAdjust: false,
           report: null,
           specSelected: false,
@@ -232,7 +227,6 @@ Page({
     const session = {
       scene,
       originalPath: imagePath,
-      secTraceIds: [this.data.secTraceId],
       resultPath: imagePath,
       beforeReport: report,
       afterReport: report,
@@ -356,7 +350,6 @@ Page({
             const session = {
               scene,
               originalPath: imagePath,
-      secTraceIds: [this.data.secTraceId],
               resultPath: result.path,
               beforeReport: this.data.report,
               afterReport,

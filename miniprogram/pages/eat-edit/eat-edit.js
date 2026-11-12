@@ -1,6 +1,5 @@
 const { getWheel, upsertWheel, resetDefaultWheel } = require('../../utils/food-wheel-storage')
 const { buildShareMessage } = require('../../utils/share')
-const { guardText } = require('../../utils/sec-check')
 
 const RESET_HINTS = {
   default: '将默认转盘恢复为全国连锁品牌列表，自定义修改会被覆盖',
@@ -54,7 +53,7 @@ Page({
     this.setData({ newItem: e.detail.value })
   },
 
-  async onAddItem() {
+  onAddItem() {
     const text = (this.data.newItem || '').trim()
     if (!text) {
       wx.showToast({ title: '请输入内容', icon: 'none' })
@@ -64,7 +63,6 @@ Page({
       wx.showToast({ title: '已存在', icon: 'none' })
       return
     }
-    if (!(await guardText(text))) return
     this.setData({
       items: [...this.data.items, text],
       newItem: ''
@@ -78,7 +76,7 @@ Page({
     this.setData({ items })
   },
 
-  async onSave() {
+  onSave() {
     const name = (this.data.name || '').trim()
     if (!name) {
       wx.showToast({ title: '请填写转盘名称', icon: 'none' })
@@ -88,7 +86,6 @@ Page({
       wx.showToast({ title: '至少保留 2 个选项', icon: 'none' })
       return
     }
-    if (!(await guardText([name, ...this.data.items].join('\n')))) return
     upsertWheel({
       id: this.data.wheelId,
       name,

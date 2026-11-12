@@ -5,7 +5,6 @@ const {
   toPdfFileName
 } = require('../../utils/pdf-maker')
 const { buildShareMessage } = require('../../utils/share')
-const { guardPickedImages, guardImagesOutput, guardText } = require('../../utils/sec-check')
 
 const fs = wx.getFileSystemManager()
 const DEFAULT_PDF_NAME = '图片'
@@ -17,7 +16,6 @@ Page({
 
   data: {
     images: [],
-    traceIds: [],
     converting: false,
     pdfPath: '',
     pdfName: DEFAULT_PDF_NAME,
@@ -53,14 +51,11 @@ Page({
       mediaType: ['image'],
       sourceType: ['album'],
       sizeType: ['original'],
-      success: async (res) => {
-        const picked = res.tempFiles.map((f) => f.tempFilePath)
-        const checked = await guardPickedImages(picked)
-        if (!checked || !checked.paths.length) return
+      success: (res) => {
+        const paths = res.tempFiles.map((f) => f.tempFilePath)
         this.cleanupPdf()
         this.setData({
-          images: [...this.data.images, ...checked.paths],
-          traceIds: [...this.data.traceIds, ...checked.traceIds],
+          images: [...this.data.images, ...paths],
           ...this.resetPdfResult()
         })
       }
@@ -70,18 +65,15 @@ Page({
   removeImage(e) {
     const index = e.currentTarget.dataset.index
     const images = [...this.data.images]
-    const traceIds = [...this.data.traceIds]
     images.splice(index, 1)
-    traceIds.splice(index, 1)
     this.cleanupPdf()
-    this.setData({ images, traceIds, ...this.resetPdfResult() })
+    this.setData({ images, ...this.resetPdfResult() })
   },
 
   clearImages() {
     this.cleanupPdf()
     this.setData({
       images: [],
-      traceIds: [],
       pdfName: DEFAULT_PDF_NAME,
       ...this.resetPdfResult()
     })
@@ -108,10 +100,8 @@ Page({
   },
 
   async onConvert() {
-    const { images, pdfName, traceIds } = this.data
+    const { images, pdfName } = this.data
     if (!images.length) return
-    if (!(await guardText(pdfName))) return
-    if (!(await guardImagesOutput(traceIds))) return
 
     this.cleanupPdf()
     this.setData({ converting: true, ...this.resetPdfResult() })
@@ -153,10 +143,9 @@ Page({
     }
   },
 
-  async applyPdfRename() {
+  applyPdfRename() {
     const { pdfPath, pdfName } = this.data
     if (!pdfPath) return
-    if (!(await guardText(pdfName))) return
 
     const pdfFileName = toPdfFileName(pdfName)
     const base = pdfFileName.replace(/\.pdf$/i, '')
@@ -185,10 +174,9 @@ Page({
     })
   },
 
-  async sharePdf() {
-    const { pdfPath, pdfFileName, traceIds } = this.data
+  sharePdf() {
+    const { pdfPath, pdfFileName } = this.data
     if (!pdfPath) return
-    if (!(await guardImagesOutput(traceIds))) return
     if (wx.shareFileMessage) {
       wx.shareFileMessage({
         filePath: pdfPath,

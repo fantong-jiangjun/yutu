@@ -33,7 +33,7 @@
 
   <view class="foot-note">
     <view class="foot-note-item">· 仅支持 http / https 链接，扫码可直接打开网页</view>
-    <view class="foot-note-item">· 二维码在手机本地生成；链接文字需通过内容安全检测</view>
+    <view class="foot-note-item">· 全部在手机本地生成，不上传服务器</view>
   </view>
 
   <canvas type="2d" id="qrExportCanvas" class="hidden-canvas" style="width:800px;height:800px;" />

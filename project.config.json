@@ -1,7 +1,6 @@
 {
   "description": "宇图助手 - 考试报名照片合规处理",
   "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
   "packOptions": {
     "ignore": [],
     "include": []

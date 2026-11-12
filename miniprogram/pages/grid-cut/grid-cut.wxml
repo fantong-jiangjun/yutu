@@ -1,7 +1,7 @@
 <view class="tool-page">
   <view class="tool-banner">
     <text>🔒</text>
-    <text>本地切图，适合发朋友圈九宫格；所选图片需通过微信内容安全检测</text>
+    <text>本地切图，不上传服务器，适合发朋友圈九宫格</text>
   </view>
 
   <view class="tool-card" style="padding: 28rpx;">

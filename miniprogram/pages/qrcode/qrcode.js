@@ -1,6 +1,5 @@
 const { exportQR } = require('../../utils/qrcode-draw')
 const { buildShareMessage } = require('../../utils/share')
-const { guardText } = require('../../utils/sec-check')
 
 function isHttpUrl(text) {
   return /^https?:\/\//i.test(String(text || '').trim())
@@ -48,7 +47,6 @@ Page({
       wx.showToast({ title: '请输入 http 或 https 开头的链接', icon: 'none' })
       return
     }
-    if (!(await guardText(url))) return
 
     this.setData({ generating: true, showResult: true, qrPath: '' })
     wx.showLoading({ title: '生成中...', mask: true })

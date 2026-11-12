@@ -32,14 +32,13 @@ function walk(dir, ext, out = []) {
 const rel = (p) => path.relative(ROOT, p).replace(/\\/g, '/')
 
 // ---- JSON
-for (const f of walk(MP, '.json').concat(walk(path.join(ROOT, 'cloudfunctions'), '.json'), [path.join(ROOT, 'project.config.json')])) {
+for (const f of walk(MP, '.json').concat([path.join(ROOT, 'project.config.json')])) {
   try { JSON.parse(fs.readFileSync(f, 'utf8')); checks++ } catch (e) { errors.push(`JSON 解析失败 ${rel(f)}: ${e.message}`) }
 }
 
 const app = JSON.parse(fs.readFileSync(path.join(MP, 'app.json'), 'utf8'))
 const project = JSON.parse(fs.readFileSync(path.join(ROOT, 'project.config.json'), 'utf8'))
 ok(project.miniprogramRoot === 'miniprogram/', 'project.config.json miniprogramRoot 应为 miniprogram/')
-ok(project.cloudfunctionRoot === 'cloudfunctions/', 'project.config.json cloudfunctionRoot 应为 cloudfunctions/')
 ok(fs.existsSync(path.join(MP, app.sitemapLocation)), 'sitemap.json 不存在')
 
 // ---- 页面四件套 + 组件
@@ -119,13 +118,11 @@ for (const u of units) {
   }
 }
 
-// ---- 云函数
-const cf = path.join(ROOT, 'cloudfunctions', 'secCheck')
-for (const f of ['index.js', 'package.json', 'config.json']) ok(fs.existsSync(path.join(cf, f)), `云函数缺少 ${f}`)
-const cfg = JSON.parse(fs.readFileSync(path.join(cf, 'config.json'), 'utf8'))
-for (const api of ['security.msgSecCheck', 'security.imgSecCheck', 'security.mediaCheckAsync']) {
-  ok(cfg.permissions.openapi.includes(api), `云函数 config.json 缺少 openapi 权限 ${api}`)
+// ---- 纯前端：不应残留云开发调用
+for (const f of walk(MP, '.js')) {
+  ok(!/wx\.cloud\b/.test(fs.readFileSync(f, 'utf8')), ` 仍调用 wx.cloud`)
 }
+ok(!fs.existsSync(path.join(ROOT, 'cloudfunctions')), '不应存在 cloudfunctions 目录')
 
 // ---- README 链接
 const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8')

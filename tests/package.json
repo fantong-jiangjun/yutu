@@ -4,9 +4,8 @@
   "description": "宇图助手自动化测试（不参与小程序打包）",
   "scripts": {
     "static": "node static-check.js",
-    "cloud": "node cloud-function.test.js",
     "e2e": "node e2e.js",
-    "test": "node static-check.js && node cloud-function.test.js && node e2e.js"
+    "test": "node static-check.js && node e2e.js"
   },
   "devDependencies": {
     "miniprogram-automator": "^0.12.1"

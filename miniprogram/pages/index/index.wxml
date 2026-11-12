@@ -1,6 +1,6 @@
 <view class="index-page">
   <view class="notice-bar">
-    <text class="notice-text">照片在手机本地处理；仅压缩副本用于内容安全检测，检测后自动删除</text>
+    <text class="notice-text">照片仅在手机本地处理，不上传服务器；本工具不提供发布或公开展示图片的功能</text>
   </view>
 
   <view class="hero-card" bindtap="goSmartUpload">

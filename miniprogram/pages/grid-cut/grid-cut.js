@@ -1,6 +1,5 @@
 const { splitToGrid } = require('../../utils/grid-split')
 const { buildShareMessage } = require('../../utils/share')
-const { guardPickedImages, guardImagesOutput } = require('../../utils/sec-check')
 
 Page({
   onShareAppMessage() {
@@ -9,7 +8,6 @@ Page({
 
   data: {
     srcPath: '',
-    secTraceId: '',
     pieces: [],
     splitting: false,
     saving: false
@@ -21,11 +19,9 @@ Page({
       mediaType: ['image'],
       sourceType: ['album', 'camera'],
       sizeType: ['original'],
-      success: async (res) => {
+      success: (res) => {
         const path = res.tempFiles[0].tempFilePath
-        const checked = await guardPickedImages([path])
-        if (!checked || !checked.paths.length) return
-        this.setData({ srcPath: path, secTraceId: checked.traceIds[0], pieces: [] })
+        this.setData({ srcPath: path, pieces: [] })
       }
     })
   },
@@ -119,9 +115,8 @@ Page({
   },
 
   async saveAll() {
-    const { pieces, secTraceId } = this.data
+    const { pieces } = this.data
     if (!pieces.length) return
-    if (!(await guardImagesOutput([secTraceId]))) return
 
     this.setData({ saving: true })
     wx.showLoading({ title: '保存中...', mask: true })

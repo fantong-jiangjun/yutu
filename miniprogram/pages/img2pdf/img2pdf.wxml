@@ -1,6 +1,6 @@
 <view class="container">
   <view class="privacy-banner">
-    <text>🔒 本地转换，多张图片合成一个 PDF</text>
+    <text>🔒 本地转换，多张图片合成一个 PDF，不上传服务器</text>
   </view>
 
   <view class="card">
@@ -74,7 +74,7 @@
     <view class="foot-note-item">· 微信相册每次最多选 9 张，可多次添加</view>
     <view class="foot-note-item">· 单次合成最多 {{maxPages}} 张</view>
     <view class="foot-note-item">· 保留原图尺寸，预计 PDF 超过 {{maxPdfMb}}MB 时仅降低画质，否则可能闪退</view>
-    <view class="foot-note-item">· 本地合成 PDF；图片仅用于内容安全检测，检测后自动删除</view>
+    <view class="foot-note-item">· 全部本地处理，不上传服务器</view>
   </view>
 
   <canvas type="2d" id="pdfCanvas" class="hidden-canvas" style="width:800px;height:800px;" />
